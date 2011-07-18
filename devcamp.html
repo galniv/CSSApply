@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta name="description" content="CSSApplyCascading Style Sheets for UIView/NSView/CALayerS (it’s amazing) The Team Zac Bowling - @zbowling  Sam Stewart - @programpro Jonathan Dalrymple - @veritech Julie Silverman - @jssqrd What is CSS? CSS separates the design and presentation semantics from the content by moving it into a separate file. Popular standard on the web since 1996. Why use CSS for UIKit/AppKit/Core Animation? CSS fits the UIView/NSView/CALayer hierarchy really well. CSS is not really tied down to HTML. Other toolkits (such as QT and XUL) already support using CSS to style their UI frameworks. Designers and developers are both familiar with it and understand it. Easy to use!(Overly simplistic 2 line example!) - (void)viewDidLoad { 	[super viewDidLoad];   NSURL *cssURL = [[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:@&quot;mainview.css&quot;]];   CSSStyleSheet *styleSheet = [CSSStyleSheet styleSheetFromURL:cssURL]; 	[self.view applyCSS:styleSheet]; }  Apply CSS IDs and Class to any UIView/NSView/CALayer (via a category) UIButton *coolButton = ...;      coolButton.cssID = @&quot;CoolButton&quot;; coolButton.cssClassNames = [NSSet setWithObjects:@&quot;highlight&quot;, @&quot;awesome&quot;, nil];      [self.view addSubview:coolButton]; [self.view applyCSS:styleSheet]; CSS: UIButton { /* NSObject class names */	backgroundColor: #f8fbff;	font: UIFont(&quot;Helvetica&quot;, 10pt);}#CoolButton { /* CSS hash/id names */	backgroundColor: #282828;	frame: CGRect(1,1,300,300);}.highlight { /* CSS classes */	backgroundColor: #ff00ff;} DESCENDENT MATCHING:  #CoolView UIButton .highlight { 	backgroundColor: #ff00ff;}   Works great with UIView animations! [UIView animateWithDuration:1.0f                            delay:0                           options:UIViewAnimationCurveEaseIn                       animations:^{                           coolButton.cssClassNames = [NSSet setWithObject:@&quot;flashing&quot;];                          ...                          //[coolButton applyCSS:styleSheet];                          [self.view applyCSS:styleSheet];                      }                      completion:NULL]; How does it work? A CSS tokenizer and parser was built using the CSS syntax specification on the W3C website using with Flex.  Basic CSS properties set on their respective objects via KVC. (mappings can be registered for specially named properties) CSS functions can be registered to evaluate special properties (UIFont, CGRect, CGSize, url, UIImage, etc)  Categories on UIView, NSView, and CALayer know how to traverse their hierarchies to apply the CSS rules given their precedence.  Works inside interface builder!*on iOS 5  iOS 5 features! Even more powerful on iOS 5 with the new [redacted per NDA]. It works with setting the [redacted per NDA] in your application delegate to setup [redacted per NDA]  (Ask me later...) Current limitations Compatible with a subset of CSS 2.1. Decedent matching works. Computing styles based on precedence works. Many other advanced features do not (yet!!) The “!important” flag is not allowed (it’s an awful hack in CSS anyways) The project is currently parsing CSS and updating UIView hierarchies for simple properties (backgroundColor, text, etc) Cute Ideas(none of these ideas are really recommended or even fully thought out) Download the CSS files from the web and re-skin your app after shipping. Full visual layout in CSS CSS based animations @import  user configurable CSS files (heck.. why not?) Side note: Cascading style sheets are way more complicated then they look.  There are complicated rules about the order how styles should be applied based. I heard you like inherited styles, so I styled your parent so you can style your view while you style your view. Computing the final style for a view has to recurse up the view tree and down the style search tree. (Don’t ask... our brains hurt.) one more thing... JQuery selector like view searching UIView *view = [self.view find:@”#CoolButton”]; NSArray *views = [self.view findAll:@”.highlighted”]; Thanks! All the code was developed here over the weekend and we plan to continue to use this. (We need it for our stuff.) Releasing it open source under the X11 (BSD 2 clause) license.  Final version will be at github: http://github.com/zbowling/CSSApply"/>
+    <title></title>
+    <script type="text/javascript" language="javascript">
+//      <![CDATA[
+            var images = new Array (16);
+            images[0] = "devcamp_files/devcamp.001.png";
+            images[1] = "devcamp_files/devcamp.002.png";
+            images[2] = "devcamp_files/devcamp.003.png";
+            images[3] = "devcamp_files/devcamp.004.png";
+            images[4] = "devcamp_files/devcamp.005.png";
+            images[5] = "devcamp_files/devcamp.006.png";
+            images[6] = "devcamp_files/devcamp.007.png";
+            images[7] = "devcamp_files/devcamp.008.png";
+            images[8] = "devcamp_files/devcamp.009.png";
+            images[9] = "devcamp_files/devcamp.010.png";
+            images[10] = "devcamp_files/devcamp.011.png";
+            images[11] = "devcamp_files/devcamp.012.png";
+            images[12] = "devcamp_files/devcamp.013.png";
+            images[13] = "devcamp_files/devcamp.014.png";
+            images[14] = "devcamp_files/devcamp.015.png";
+            images[15] = "devcamp_files/devcamp.016.png";
+            var index = 0;
+            function WindowLoaded(evt)
+            {
+                document.body.onselectstart = function () { return false; };
+            }
+            function Step(i)
+            {
+                GoTo(index + i)
+            }
+            function GoTo(newIndex)
+            {
+                if(newIndex >= 0 && newIndex < images.length)
+                {
+                    index = newIndex;
+                    document.Slideshow.src = images[index];
+                }
+            }
+//      ]]>
+    </script>
+</head>
+<body bgcolor="black" onload='WindowLoaded(event);'>
+    <p align="center">
+        <br/>
+        <br/>
+        <img name="Slideshow" alt="" src="devcamp_files/devcamp.001.png" onclick="Step(1)"/>
+    </p>
+</body>
+</html>
