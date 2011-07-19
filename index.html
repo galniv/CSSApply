@@ -1,31 +1,99 @@
-<html>
+<!doctype html>
+<html lang="en" class="no-js">
 <head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<base href="http://cssapply.github.com/CSSApply/" />
 	<title>CSSApply</title>
+	<meta name="description" content="Apply cascading style sheets to UIKit, AppKit, and Core Animation">
+	<meta name="author" content="Zac Bowling">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<link rel="stylesheet" href="css/style.css?v=2">
+
+	<script src="js/libs/modernizr-1.7.min.js"></script>
 </head>
 <body>
-	<h1>CSSApply</h1>
-	<h2>Apply CSS to UIKit, AppKit, and Core Animation</h2>
-	
-	Links:
-	<ul>
-		<li>
-			<a href="http://github.com/cssapply/CSSApply/" title="github project page">CSSApply github project page</a>
-		</li>
-		<li>
-			<a href="http://www.ustream.tv/recorded/16073539/highlight/187549" title="CSSApply, danielbru Captured on Ustream:iOSDevCamp Demos Part 1 Conference">iOSDevCamp 2011 Presentation Video (UStream)</a> - Slides: <a href="devcamp.html">HTML</a>, <a href="devcamp.pdf">PDF</a> 
-		</li>
-	</ul>
-	
-	
-	Team:
-	<ul>
-		<li>Zac Bowling - <a href="http://twitter.com/zbowling">@zbowling</a></li>
-		<li>Sam Stewart - <a href="http://twitter.com/programpro">@programpro</a></li>
-		<li>Jonathan Dalrymple - <a href="http://twitter.com/veritech">@veritech</a></li>
-		<li>Julie Silverman - <a href="http://twitter.com/jssqrd" title="@jssqrd">@jssqrd</a></li>
-	</ul>
-	
-	Introduced and developed at iOSDevCamp 2011 where it went on to win <a href="http://www.iosdevcamp.org/2011/07/18/quick-list-of-iosdevcamp2011-hackathon-winners/" title="iOSDevCamp    &raquo; Quick List of iOSDevCamp 2011 Hackathon Winners">best open source app</a>. 
-	
+	<div id="container">
+		<header>
+			<h1>CSSApply</h1>
+			<p>
+				Apply cascading style sheets to UIKit, AppKit, and Core Animation
+			</p>
+		</header>
+
+		<div id="main" role="main">
+			<div class="section">
+				<h2>
+					About
+				</h2>
+				<p>
+					CSSApply an objective-c library that allows you to dynamically apply cascading style sheets properties on to UIKit, AppKit, and Core Animation classes at runtime.
+				</p>
+				<p>
+					It was introduced and developed at iOSDevCamp 2011 where it went on to win <a href="http://www.iosdevcamp.org/2011/07/18/quick-list-of-iosdevcamp2011-hackathon-winners/" title="iOSDevCamp » Quick List of iOSDevCamp 2011 Hackathon Winners">best open source app</a>.
+				</p>
+			</div>
+			<div class="section">
+				<h2>
+					Links
+				</h2>
+				<ul>
+					<li>
+						<a href="http://github.com/cssapply/CSSApply/" title="github project page">CSSApply github project page</a>
+					</li>
+					<li>
+						<a href="http://www.ustream.tv/recorded/16073539/highlight/187549" title="CSSApply, danielbru Captured on Ustream:iOSDevCamp Demos Part 1 Conference">iOSDevCamp 2011 Presentation Video (UStream)</a> - Slides: <a href="devcamp.html">HTML</a>, <a href="devcamp.pdf">PDF</a>
+					</li>
+				</ul>
+			</div>
+			<div class="section">
+				<h2>
+					Team
+				</h2>
+				<ul>
+					<li>Zac Bowling - <a href="http://twitter.com/zbowling">@zbowling</a>
+					</li>
+					<li>Sam Stewart - <a href="http://twitter.com/programpro">@programpro</a>
+					</li>
+					<li>Jonathan Dalrymple - <a href="http://twitter.com/veritech">@veritech</a>
+					</li>
+					<li>Julie Silverman - <a href="http://twitter.com/jssqrd" title="@jssqrd">@jssqrd</a>
+					</li>
+				</ul>
+			</div>
+			<div class="section">
+				<h2>
+					Why use CSSApply for UIKit/AppKit/Core Animation?
+				</h2>
+				<ul>
+					<li>CSS fits the UIView/NSView/CALayer hierarchy really well.
+					</li>
+					<li>CSS is not really tied down to HTML. Other toolkits (such as QT and XUL) already support using CSS to style their UI frameworks.
+					</li>
+					<li>Designers and developers are both familiar with it and understand it.
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<footer>
+			Copyright&copy; 2011 
+		</footer>
+	</div>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.5.1.min.js"%3E%3C/script%3E'))</script>
+	<script src="js/plugins.js"></script>
+	<script src="js/script.js"></script>
+	<script>
+		var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
+		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+		g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+		s.parentNode.insertBefore(g,s)}(document,'script'));
+	</script>
 </body>
 </html>
