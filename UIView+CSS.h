@@ -10,6 +10,8 @@
 #import "CSSStyleSheet.h"
 #import "CSSSelectorTree.h"
 
+#import "NSObject+CSS.h"
+
 @interface UIView (CSS)
 
 - (void)applyAll:(CSSStyleSheet*)sheet;

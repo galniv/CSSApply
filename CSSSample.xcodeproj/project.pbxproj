@@ -40,6 +40,17 @@
 		D9C27FF513D24D2C000B1A43 /* testcase.css in Resources */ = {isa = PBXBuildFile; fileRef = D9C27FF213D24CA3000B1A43 /* testcase.css */; };
 		D9C9DBA213D28BE000F34B83 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C9DBA113D28BE000F34B83 /* QuartzCore.framework */; };
 		D9F5230B13D36EA6003D378D /* maintest.css in Resources */ = {isa = PBXBuildFile; fileRef = D9F5230A13D36EA6003D378D /* maintest.css */; };
+		F163F4E5159D244100E46A6C /* CSSPlistMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DEE03D613D235EA007C87FE /* CSSPlistMapper.m */; };
+		F163F4E6159D244100E46A6C /* CSSResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DEE03CB13D234FD007C87FE /* CSSResourceManager.m */; };
+		F163F4E7159D244100E46A6C /* CSSSelectorTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D91E74213D29E33009C11F8 /* CSSSelectorTree.m */; };
+		F163F4E8159D244100E46A6C /* css.m in Sources */ = {isa = PBXBuildFile; fileRef = D9141F5A13D26A4A006B25E0 /* css.m */; };
+		F163F4E9159D244100E46A6C /* CSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DEE03D113D23514007C87FE /* CSSParser.m */; };
+		F163F4EA159D244100E46A6C /* CSSStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DEE03DD13D24349007C87FE /* CSSStyleSheet.m */; };
+		F163F4EB159D244100E46A6C /* CSSSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DEC908113D262A8005BCF07 /* CSSSelector.m */; };
+		F163F4EC159D244100E46A6C /* UIView+CSS.m in Sources */ = {isa = PBXBuildFile; fileRef = AB5B475113D2272B00FB2A74 /* UIView+CSS.m */; };
+		F163F4ED159D244100E46A6C /* CALayer+CSS.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0ECAE013D25A9F00E151DF /* CALayer+CSS.m */; };
+		F163F4EE159D244100E46A6C /* NSObject+CSS.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0ECAE413D25B0A00E151DF /* NSObject+CSS.m */; };
+		F163F4EF159D247200E46A6C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C9DBA113D28BE000F34B83 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F163F4EF159D247200E46A6C /* QuartzCore.framework in Frameworks */,
 				AB588FBB13D243FE00EC6441 /* UIKit.framework in Frameworks */,
 				AB588FBC13D243FE00EC6441 /* Foundation.framework in Frameworks */,
 				AB588FBD13D243FE00EC6441 /* CoreGraphics.framework in Frameworks */,
@@ -352,6 +364,7 @@
 		AB50CF7B13D22017001113D0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Float:Right Ltd";
 			};
 			buildConfigurationList = AB50CF7E13D22017001113D0 /* Build configuration list for PBXProject "CSSSample" */;
@@ -422,6 +435,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F163F4E5159D244100E46A6C /* CSSPlistMapper.m in Sources */,
+				F163F4E6159D244100E46A6C /* CSSResourceManager.m in Sources */,
+				F163F4E7159D244100E46A6C /* CSSSelectorTree.m in Sources */,
+				F163F4E8159D244100E46A6C /* css.m in Sources */,
+				F163F4E9159D244100E46A6C /* CSSParser.m in Sources */,
+				F163F4EA159D244100E46A6C /* CSSStyleSheet.m in Sources */,
+				F163F4EB159D244100E46A6C /* CSSSelector.m in Sources */,
+				F163F4EC159D244100E46A6C /* UIView+CSS.m in Sources */,
+				F163F4ED159D244100E46A6C /* CALayer+CSS.m in Sources */,
+				F163F4EE159D244100E46A6C /* NSObject+CSS.m in Sources */,
 				AB588FC913D243FE00EC6441 /* TestsAppDelegate.m in Sources */,
 				AB588FD113D2442600EC6441 /* GHUnitIOSTestMain.m in Sources */,
 				AB588FD513D245A700EC6441 /* CSSObjectCategoryTest.m in Sources */,
@@ -471,6 +494,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -488,6 +513,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = "";
@@ -511,7 +538,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CSSSample/CSSSample-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "CSSSample/CSSSample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -530,7 +557,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CSSSample/CSSSample-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "CSSSample/CSSSample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";

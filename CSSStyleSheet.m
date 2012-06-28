@@ -17,20 +17,21 @@
 @synthesize root = _root;
 #pragma mark Loader Methods
 
-+ (CSSStyleSheet*)styleSheetFromURL:(NSURL *)url {
-    CSSStyleSheet *sheet = [[[CSSStyleSheet alloc] init] autorelease];
++ (CSSStyleSheet*)styleSheetFromURL:(NSURL *)url 
+{
+    CSSStyleSheet *sheet = [[CSSStyleSheet alloc] init];
     [sheet loadFromURL:url];
     return sheet;
 }
 
-+ (CSSStyleSheet*)styleSheetFromString:(NSString *)css_code {
++ (CSSStyleSheet*)styleSheetFromString:(NSString *)css_code 
+{
     //TODO: load and parse from string
     return nil;
 }
 
-- (void)loadFromURL:(NSURL*)url {
-    if (parser)
-        [parser release], parser = nil;
+- (void)loadFromURL:(NSURL*)url 
+{
     parser = [[CSSParser alloc] init];
     
     // grab the entire file and load the rule dictionary.
@@ -45,9 +46,8 @@
 }
 
 #pragma mark Tree Parsing methods
-- (void)buildTree:(NSDictionary *)rules {
-    if (_root) [_root release], _root = nil;
-    
+- (void)buildTree:(NSDictionary *)rules 
+{    
     // create the root node for the selector tree
     _root = [[CSSSelectorTree alloc] init];
     
@@ -74,9 +74,10 @@
     }
 }
 
-- (void)dealloc {
-    [super dealloc];
-    [parser release], parser = nil;
-    [_root release], _root = nil;
+- (void)dealloc 
+{
+    parser = nil;
+    _root = nil;
 }
+
 @end

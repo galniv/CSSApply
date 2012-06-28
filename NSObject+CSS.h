@@ -11,9 +11,11 @@
 
 @interface NSObject (CSS)
 
-@property (nonatomic,copy) NSString *CSSID;
-@property (nonatomic,copy) NSSet *CSSClassNames;
-@property (nonatomic,readonly) CSSSelector *CSSSelector;
+@property (nonatomic, copy) NSString* CSSID;
+@property (nonatomic, copy) NSSet* CSSClassNames;
+@property (nonatomic, readonly) CSSSelector *CSSSelector;
 
+- (void) addCSSClassName:(NSString*)className;
+- (void) removeCSSClassName:(NSString*)className;
 
 @end

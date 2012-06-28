@@ -8,15 +8,17 @@
 
 #import "CSSResourceManager.h"
 
-
 @implementation CSSResourceManager
 
-+ (CSSResourceManager*)sharedResourceManager {
++ (CSSResourceManager*) sharedResourceManager 
+{
     static dispatch_once_t onceToken;
     static CSSResourceManager *_sharedManager;
-    dispatch_once(&onceToken, ^{
+    dispatch_once(&onceToken, ^
+    {
         _sharedManager = [[CSSResourceManager alloc] init];
     });
     return _sharedManager;
 }
+
 @end

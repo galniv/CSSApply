@@ -10,7 +10,7 @@
 #import "UIView+CSS.h"
 
 @interface CSSObjectCategoryTest : GHTestCase {
-    UIView *_testView;
+    UIView* _testView;
 }
 	
 

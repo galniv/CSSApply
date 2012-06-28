@@ -29,10 +29,10 @@
 #import "CSSSelector.h"
 #import "CSSSelectorTree.h"
 
-@interface CSSStyleSheet : NSObject {
+@interface CSSStyleSheet : NSObject 
+{
     
-    CSSParser *parser;
-    
+    CSSParser *parser;    
     CSSSelectorTree *_root;
 }
 
@@ -44,5 +44,6 @@
 + (CSSStyleSheet*)styleSheetFromURL:(NSURL*)url;
 + (CSSStyleSheet*)styleSheetFromString:(NSString*)css_code;
 
-@property (nonatomic, readonly) CSSSelectorTree *root;
+@property (nonatomic, retain, readonly) CSSSelectorTree *root;
+
 @end

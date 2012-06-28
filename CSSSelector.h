@@ -12,15 +12,15 @@
  */
 #import <Foundation/Foundation.h>
 
-
-@interface CSSSelector : NSObject {
-    NSString *selector;
-    NSString *cssID;
+@interface CSSSelector : NSObject 
+{
+    //NSString *selector;
+    //NSString *cssID;
     
     // css class name (like div, ul, li, etc)
-    NSString *className;
+    //NSString *className;
     // custom classes we defined (.ourclass,.customclass, ect)
-    NSMutableArray *classes;
+    //NSMutableArray *classes;
 }
 
 - (id)initWithSelectorStr:(NSString*)selector;
@@ -39,10 +39,11 @@
 + (NSArray*)subSelectorsFromString:(NSString*)main_selector;
 
 /** The classes which are applied to use.*/
-@property (nonatomic, readonly) NSMutableArray *classes;
-@property (nonatomic, readonly) NSString *cssID;
-@property (nonatomic, readonly) NSString *className;
-@property (nonatomic, readonly) NSString *selector;
+@property (nonatomic, retain, readonly) NSMutableArray *classes;
+@property (nonatomic, retain, readonly) NSString *cssID;
+@property (nonatomic, retain, readonly) NSString *className;
+@property (nonatomic, retain, readonly) NSString *selector;
 //@property (nonatomic, readonly) NSString *
-@property (readonly) NSInteger score;
+@property (readonly, readonly) NSInteger score;
+
 @end

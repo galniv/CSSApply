@@ -9,9 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "CSSMapper.h"
 
-@interface CSSPlistMapper : NSObject <CSSMapper> {
-    
+@interface CSSPlistMapper : NSObject <CSSMapper> 
+{
 }
-
 
 @end

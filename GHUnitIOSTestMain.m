@@ -64,13 +64,16 @@ int main(int argc, char *argv[]) {
   
   NSSetUncaughtExceptionHandler(&exceptionHandler);
   
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  
-  // Register any special test case classes
-  //[[GHTesting sharedInstance] registerClassName:@"GHSpecialTestCase"];  
-  
-  int retVal = UIApplicationMain(argc, argv, nil, @"GHUnitIPhoneAppDelegate");
+    @autoreleasepool 
+    {    
+      //NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+      
+      // Register any special test case classes
+      //[[GHTesting sharedInstance] registerClassName:@"GHSpecialTestCase"];  
+      
+      int retVal = UIApplicationMain(argc, argv, nil, @"GHUnitIPhoneAppDelegate");
 
-  [pool release];
-  return retVal;
+      //[pool release];
+      return retVal;
+    }
 }

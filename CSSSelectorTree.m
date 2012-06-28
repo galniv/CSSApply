@@ -14,25 +14,37 @@
 #import "CSSSelectorTree.h"
 #import "CSSSelector.h"
 
-
 @implementation CSSSelectorTree
-@dynamic score;
-@synthesize nodes, rules, selector;
+//@dynamic score;
+@synthesize nodes = _nodes;
+@synthesize rules = _rules;
+@synthesize selector = _selector;
 
-- (id)initWithSelector:(CSSSelector *)selector_arg {
-    self = [super init];
-    if (self) {
-        selector = [selector_arg retain];
+- (id)initWithSelector:(CSSSelector *)selector_arg 
+{    
+    if (self = [super init]) 
+    {
+        _selector = selector_arg;
     }
     return self;
 }
+
+- (void)dealloc 
+{
+    _rules = nil;
+    _nodes = nil;
+    _selector = nil;
+}
+
 /** Convenience method for breaking up multi level selector
  into multiple smaller selectors wrapped in subtrees. Builds the subtrees in reverse order of specificity.*/
-+ (NSArray*)subtreesFromSelector:(NSString *)selector {
++ (NSArray*)subtreesFromSelector:(NSString *)selector 
+{
     NSArray *comps = [selector componentsSeparatedByString:@" "];
     
     NSMutableArray *subtrees = [NSMutableArray arrayWithCapacity:20];
-    for (NSString *comp in comps) {
+    for (NSString *comp in comps) 
+    {
         CSSSelector *selector = [[CSSSelector alloc] initWithSelectorStr:comp];
         CSSSelectorTree *subtree = [[CSSSelectorTree alloc] initWithSelector:selector];
         
@@ -42,15 +54,18 @@
     return subtrees;
 }
 
-+ (CSSSelectorTree*)chainSubtrees:(NSArray *)subtrees {
++ (CSSSelectorTree*)chainSubtrees:(NSArray *)subtrees 
+{
     if (![subtrees count]) return nil;
     
     //start with most specific and begin chaining
     CSSSelectorTree *cur_parent = [subtrees objectAtIndex:0];
     CSSSelectorTree *top_parent = cur_parent;
     
-    for (CSSSelectorTree *subtree in subtrees) {
-        if (subtree != cur_parent) {
+    for (CSSSelectorTree *subtree in subtrees) 
+    {
+        if (subtree != cur_parent) 
+        {
             [cur_parent.nodes addObject:subtree];
             cur_parent = subtree; //move into subtree
         }
@@ -58,8 +73,10 @@
     return top_parent;
 }
 #pragma mark Accessors
-- (void)sortNodes {
-    [nodes sortUsingComparator:(NSComparator)^(CSSSelector *a_sel, CSSSelector *b_sel) {
+- (void)sortNodes 
+{
+    [self.nodes sortUsingComparator:(NSComparator)^(CSSSelector *a_sel, CSSSelector *b_sel) 
+    {
         NSInteger a_score = [a_sel score];
         NSInteger b_score = [b_sel score];
         
@@ -75,46 +92,48 @@
  Remember, only a few properties have to match for the entire selector to match.
  @return Array of CSSSelectorTree nodes.
  */
-- (NSArray*)find:(CSSSelector *)selector_arg {
+- (NSArray*)find:(CSSSelector *)selector_arg 
+{
     NSMutableArray *results = [NSMutableArray arrayWithCapacity:20];
-    for (CSSSelectorTree *node in nodes) {
-        if ([node.selector doesMatchIntoSelector:selector_arg]) {
+    for (CSSSelectorTree *node in self.nodes) 
+    {
+        if ([node.selector doesMatchIntoSelector:selector_arg]) 
+        {
             [results addObject:node];
         }
     }
     return results;
 }
 
-- (BOOL)isLeaf {
-    return (nodes.count ? NO : YES);
+- (BOOL)isLeaf 
+{
+    return (self.nodes.count ? NO : YES);
 }
-- (NSString*)name {
+- (NSString*)name 
+{
     // grab our selector entire selector string..
-    return selector.selector;
+    return self.selector.selector;
 }
 /** Takes the biggest child score to ensure we reflect the child nodes accurately.
  Note: this may not be quite right. How do we know we "own" the biggest node?*/
-- (NSInteger)score {
+- (NSInteger)score 
+{
     NSInteger max_score = 0;
-    for (CSSSelectorTree *node in nodes) {
-        NSInteger score = [node score];
-        max_score = (score > max_score ? score : max_score);
+    for (CSSSelectorTree* node in self.nodes) 
+    {
+        //NSInteger score = [node score];
+        max_score =  MAX(max_score, node.score);  //(score > max_score ? score : max_score);
     }
     return max_score;
 }
 
-- (NSMutableArray*)nodes {
-    
-    if (!nodes) {
-        nodes = [[NSMutableArray alloc] initWithCapacity:20];
+- (NSMutableArray*) nodes 
+{    
+    if (!_nodes) 
+    {
+        _nodes = [[NSMutableArray alloc] initWithCapacity:20];
     }
-    return nodes;
+    return _nodes;
 }
 
-- (void)dealloc {
-    [rules release], rules = nil;
-    [nodes release], nodes = nil;
-    [selector release], selector = nil;
-    [super dealloc];
-}
 @end

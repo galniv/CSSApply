@@ -33,19 +33,20 @@
 #import <Foundation/Foundation.h>
 #import "CSSSelector.h"
 
-@interface CSSSelectorTree : NSObject {
+@interface CSSSelectorTree : NSObject 
+{
     //array of CSSSelectorTrees
-    NSMutableArray *nodes;
+    //NSMutableArray *nodes;
     
-    NSDictionary *rules;
-    CSSSelector *selector;
+    //NSDictionary *rules;
+    //CSSSelector *selector;
 }
 
 @property (readonly, nonatomic) NSString *name;
-@property (readonly, nonatomic) CSSSelector *selector;
-@property (retain, nonatomic) NSDictionary *rules;
+@property (readonly, retain, nonatomic) CSSSelector *selector;
+@property (retain, retain, nonatomic) NSDictionary *rules;
 // array of CSSSelectoreTree subnodes
-@property (readonly, nonatomic) NSMutableArray *nodes;
+@property (readonly, retain, nonatomic) NSMutableArray *nodes;
 @property (readonly, nonatomic) NSInteger score;
 
 - (void)sortNodes;
@@ -64,4 +65,5 @@
  It's expected that they are sorted from most specific to least specific.
  Returns the root node of the new "subtree".*/
 + (CSSSelectorTree*)chainSubtrees:(NSArray*)subtrees;
+
 @end

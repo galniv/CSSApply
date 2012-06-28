@@ -14,8 +14,9 @@
 
 - (void)dealloc
 {
-	[sampleView release];
-    [super dealloc];
+    sampleView = nil;
+	//[sampleView release];
+    //[super dealloc];
 }
 
 - (void)didReceiveMemoryWarning

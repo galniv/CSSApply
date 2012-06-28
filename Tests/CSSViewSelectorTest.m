@@ -7,12 +7,12 @@
 //
 
 #import "CSSViewSelectorTest.h"
+#import "CSSStyleSheet.h"
+
 #import "NSObject+CSS.h"
 #import "UIView+CSS.h"
 
 @implementation CSSViewSelectorTest
-
-
 
 
 -(void) setUp{
@@ -31,14 +31,14 @@
 		
 		[_testView addSubview:child];
 		
-		[child release];
+		//[child release];
 		
 	}];
 
 }
 
 -(void) tearDown{
-	[_testView release];
+	//[_testView release];
 	_testView = nil;
 }
 

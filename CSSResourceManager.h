@@ -9,13 +9,13 @@
 /** Singleton instance which does caching and loading of resources.*/
 #import <Foundation/Foundation.h>
 
-
-@interface CSSResourceManager : NSObject {
-    
+@interface CSSResourceManager : NSObject 
+{    
 }
 
-- (UIImage*)loadImage:(NSString*)path;
-- (NSString*)loadCSS:(NSString*)path;
+//- (UIImage*) loadImage:(NSString*)path;
+//- (NSString*) loadCSS:(NSString*)path;
 
 + (CSSResourceManager*)sharedResourceManager;
+
 @end

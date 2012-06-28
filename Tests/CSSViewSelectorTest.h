@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface CSSViewSelectorTest : GHTestCase {
     UIView	*_testView;
 }

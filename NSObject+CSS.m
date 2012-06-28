@@ -23,7 +23,8 @@ static const char* kUIViewCSSSelectorKey = "UIViewCSSSelectorKey";
  *	Set class names
  *	@param a NSSet
  */
--(void) setCSSClassNames:(NSSet*) aClassName{
+-(void) setCSSClassNames:(NSSet*) aClassName
+{
 	objc_setAssociatedObject(self, &kUIViewClassNameKey, aClassName, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
@@ -32,8 +33,25 @@ static const char* kUIViewCSSSelectorKey = "UIViewCSSSelectorKey";
  *
  *	@return NSSet
  */
--(NSSet*) CSSClassNames{
+-(NSSet*) CSSClassNames
+{
 	return objc_getAssociatedObject(self, &kUIViewClassNameKey);
+}
+
+- (void) addCSSClassName:(NSString*)className
+{
+    NSMutableSet* temp = [self.CSSClassNames mutableCopy];
+    if (!temp) temp = [[NSMutableSet alloc] init];
+    [temp addObject:className];
+    [self setCSSClassNames:temp];    
+}
+
+- (void) removeCSSClassName:(NSString*)className
+{
+    NSMutableSet* temp = [self.CSSClassNames mutableCopy];
+    if (!temp) return;
+    [temp removeObject:className];
+    [self setCSSClassNames:temp];    
 }
 
 
@@ -41,7 +59,8 @@ static const char* kUIViewCSSSelectorKey = "UIViewCSSSelectorKey";
  *	set the view's id
  *	@param an id name
  */
--(void) setCSSID:(NSString*) anIDName{
+-(void) setCSSID:(NSString*) anIDName
+{
 	objc_setAssociatedObject(self, &kUIViewIDNameKey, anIDName, OBJC_ASSOCIATION_COPY_NONATOMIC );
 }
 
@@ -49,12 +68,14 @@ static const char* kUIViewCSSSelectorKey = "UIViewCSSSelectorKey";
  *	Get the view's id name
  *	@return an id name
  */
--(NSString*) CSSID{
+-(NSString*) CSSID
+{
 	return (NSString*) objc_getAssociatedObject(self, &kUIViewIDNameKey);
 }
 
 
--(CSSSelector*)CSSSelector {
+-(CSSSelector*)CSSSelector 
+{
     CSSSelector *selector = (CSSSelector*) objc_getAssociatedObject(self, &kUIViewCSSSelectorKey);
     
     if (!selector)

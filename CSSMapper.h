@@ -10,6 +10,9 @@
  
  Each mapper must return a list of mappers (flat namespace though that may change in the future).*/
 @protocol CSSMapper <NSObject>
+
 @required
+
 - (NSDictionary*)loadMappings;
+
 @end

@@ -16,7 +16,7 @@
 }
 
 -(void) tearDown{
-	[_testView release];
+	//[_testView release];
 	_testView = nil;
 }
 

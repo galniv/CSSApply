@@ -61,8 +61,9 @@
 
 - (void)dealloc
 {
-	[_window release];
-    [super dealloc];
+    _window = nil;
+	//[_window release];
+    //[super dealloc];
 }
 
 @end
