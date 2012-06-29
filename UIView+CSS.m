@@ -16,9 +16,9 @@
     NSArray *keys = [props allKeys];
     for (NSString *key in keys) 
     {
-        @try 
+        @try
         {
-            [self setValue:[props objectForKey:key] forKeyPath:key];
+            [self setValue:[[props objectForKey:key] objectAtIndex:0] forKey:key];
         }
         @catch (NSException *exception) 
         {
@@ -44,7 +44,7 @@
             }
             
             // if it has nodes, we need to match upwards in the tree.
-            if (node.nodes) 
+            if (node.nodes && node.nodes.count > 0) 
             {
                 // we need to check if we match all the way up the tree
                 // we always go all the way to the root bc we do descendant matching not just child matching but descendant
@@ -82,13 +82,15 @@
             
         }
     }
-    [self applyProperties:dict];
+    if (dict.count > 0) [self applyProperties:dict];
     
     if (doRecurse) 
     {
         //tell all the children to do the rule merging
         //also we pass our styles down for inheritance.
-        [self applyStylesToChildren:treeNode withInheirtedStyleDict:dict recurse:YES];
+        for (int i = 0; i < self.subviews.count; i++) {
+            [[self.subviews objectAtIndex:i] applyStylesToChildren:treeNode withInheirtedStyleDict:dict recurse:YES];
+        }
     }
 }
 

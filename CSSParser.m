@@ -23,6 +23,7 @@ CSSParser* gActiveParser = nil;
 @interface CSSParser()
 
 - (void)consumeToken:(int)token text:(char*)text;
+- (UIColor *)colorWithHexString:(NSString *)stringToConvert;
 
 @end
 
@@ -35,6 +36,7 @@ int cssConsume(char* text, int token)
 
 
 @implementation CSSParser
+
 - (id)init 
 {
     if (self = [super init]) 
@@ -58,8 +60,8 @@ int cssConsume(char* text, int token)
 
 - (void)consumeToken:(int)token text:(char*)text 
 {
-    NSString* string = [[NSString stringWithCString: text encoding: NSUTF8StringEncoding] lowercaseString];
-    NSLog(@" %x : %@",token,string);
+    // ignroe whitespace
+    NSString* string = [[NSString stringWithCString: text encoding: NSUTF8StringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     switch (token) 
     {
@@ -83,10 +85,17 @@ int cssConsume(char* text, int token)
                     if (nil != _activePropertyName) 
                     {
                         NSMutableArray* values = [_activeRuleSet objectForKey:_activePropertyName];
-                        [values addObject:string];
+                        
+                        // detect and convert colors
+                        if ((token == CSSHASH) && (string.length == 7 || string.length == 9)) {
+                            // strip the hash
+                            [values addObject:[self colorWithHexString:[string substringFromIndex:1]]];
+                        }
+                        else {
+                            [values addObject:string];
+                        }
                     }
                 }
-                
             } 
             else 
             {
@@ -206,6 +215,43 @@ int cssConsume(char* text, int token)
     
     _lastTokenText = string;
     _lastToken = token;
+}
+
+// taken from http://arstechnica.com/apple/2009/02/iphone-development-accessing-uicolor-components/
+- (UIColor *) colorWithHexString: (NSString *) stringToConvert
+{
+	NSString *cString = [[stringToConvert stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+	
+	// String should be 6 or 8 characters
+	if ([cString length] < 6) return [UIColor clearColor];
+	
+	// strip 0X if it appears
+	if ([cString hasPrefix:@"0X"]) cString = [cString substringFromIndex:2];
+	
+	if ([cString length] != 6) return [UIColor clearColor];
+    
+	// Separate into r, g, b substrings
+	NSRange range;
+	range.location = 0;
+	range.length = 2;
+	NSString *rString = [cString substringWithRange:range];
+	
+	range.location = 2;
+	NSString *gString = [cString substringWithRange:range];
+	
+	range.location = 4;
+	NSString *bString = [cString substringWithRange:range];
+	
+	// Scan values
+	unsigned int r, g, b;
+	[[NSScanner scannerWithString:rString] scanHexInt:&r];
+	[[NSScanner scannerWithString:gString] scanHexInt:&g];
+	[[NSScanner scannerWithString:bString] scanHexInt:&b];
+	
+	return [UIColor colorWithRed:((float) r / 255.0f)
+						   green:((float) g / 255.0f)
+							blue:((float) b / 255.0f)
+						   alpha:1.0f];
 }
 
 #pragma mark -

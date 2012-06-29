@@ -29,6 +29,15 @@
 
 #pragma mark - View lifecycle
 
+- (void)loadView {
+    [super loadView];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button.frame = CGRectMake(10, 10, 100, 100);
+    button.CSSID = @"magicButton";
+    [button setTitle:@"button!" forState:UIControlStateNormal];
+    [[self view] addSubview:button];
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -41,7 +50,7 @@
 									 withExtension:@"css"
 			  ];
 
-	[[self view] apply:[CSSStyleSheet styleSheetFromURL:cssURL]];
+	[[self view] applyAll:[CSSStyleSheet styleSheetFromURL:cssURL]];
     
 }
 

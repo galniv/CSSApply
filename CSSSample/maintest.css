@@ -1,7 +1,13 @@
-#container{
-    backgroundColor: #333333;
+UILabel{
+    backgroundColor: #0000ff;
+    textColor: #00ff00;
 }
 
-UILabel{
-    backgroundColor: #ff00ff;
+UIRoundedRectButton
+{
+    backgroundColor: #FF0000;
+}
+
+UIRoundedRectButton#magicButton {
+    backgroundColor: #00FF00;
 }
