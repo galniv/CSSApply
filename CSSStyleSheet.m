@@ -26,8 +26,9 @@
 
 + (CSSStyleSheet*)styleSheetFromString:(NSString *)css_code 
 {
-    //TODO: load and parse from string
-    return nil;
+    CSSStyleSheet *sheet = [[CSSStyleSheet alloc] init];
+    [sheet loadFromString: css_code];
+    return sheet;
 }
 
 - (void)loadFromURL:(NSURL*)url 
@@ -42,7 +43,13 @@
 }
 
 - (void)loadFromString:(NSString *)css_code {
-    //TODO: load from string (need it in the parser class.)
+    parser = [[CSSParser alloc] init];
+    
+    // grab the entire file and load the rule dictionary.
+    NSDictionary *rules = [parser parseString: css_code];
+    
+    //build the tree from the parsed rules
+    [self buildTree:rules];
 }
 
 #pragma mark Tree Parsing methods
