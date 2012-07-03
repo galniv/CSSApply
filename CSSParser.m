@@ -62,7 +62,7 @@ int cssConsume(char* text, int token)
 {
     // ignroe whitespace
     NSString* string = [[NSString stringWithCString: text encoding: NSUTF8StringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    
+    NSLog(@"current: %d, %@. previous: %d, %@", token, string, _lastToken, _lastTokenText);
     switch (token) 
     {
         case CSSHASH:
@@ -99,11 +99,12 @@ int cssConsume(char* text, int token)
             } 
             else 
             {
-                if (_lastToken == CSSUNKNOWN && [_lastTokenText isEqualToString:@"."]) 
+                if ((_lastToken != CSSUNKNOWN) && (_lastTokenText != nil))
                 {
                     string = [_lastTokenText stringByAppendingString:string];
                 }
-                [_activeCssSelectors addObject:string];
+                // don't add the string yet. it will only be recognized as a selector when the left curly-brace,
+                //  is encountered in order to recognize complex inheritance, e.g. UILabel.someClass#someID
                 _activePropertyName=nil;
             }
             break;
@@ -135,20 +136,26 @@ int cssConsume(char* text, int token)
         case CSSNUMBER:
         case CSSURI: 
         {
-            // (nil != _activePropertyName);            
-            if (nil != _activePropertyName) 
+            if (nil != _activePropertyName)
             {
                 NSMutableArray* values = [_activeRuleSet objectForKey:_activePropertyName];
                 [values addObject:string];
             }
             break;
-        }            
-        case CSSUNKNOWN: 
+        }
+        case CSSUNKNOWN:
         {
-            switch (text[0]) 
+            switch (text[0])
             {
-                case '{': 
+                case '{':
                 {
+                    // wait until here (the beginning of the definition) before recognizing a selector.
+                    if ((_lastToken != CSSUNKNOWN) && (_lastTokenText != nil))
+                    {
+                        [_activeCssSelectors addObject:_lastTokenText];
+                        _activePropertyName=nil;
+                    }
+                    
                     _state.Flags.InsideDefinition = YES;
                     _state.Flags.InsideFunction = NO;
                     _activeRuleSet=nil;

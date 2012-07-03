@@ -102,11 +102,9 @@
             {
                 _className = [classes_comps objectAtIndex:0];
             } 
-            else 
-            {
-                _classes = [NSMutableArray arrayWithCapacity:20];
-                [self.classes addObjectsFromArray:classes_comps];
-            }
+            
+            _classes = [NSMutableArray arrayWithCapacity:20];
+            [self.classes addObjectsFromArray:[classes_comps subarrayWithRange:NSMakeRange(1, [classes_comps count] - 1)]];
         }
     }
 }
@@ -118,10 +116,11 @@
 }
 
 - (BOOL)doesMatchIntoSelector:(CSSSelector *)other_selector 
-{    
+{
+    NSLog(@"ID: %@, className: %@, classes: %@", self.cssID, self.className, self.classes);
+    NSLog(@"comapring to: ID: %@, className: %@, classes: %@", other_selector.cssID, other_selector.className, other_selector.classes);
     if (self.classes)
     {
-        NSLog(@"comparing my classes: %@ to other's classes %@", self.classes, other_selector.classes);
         NSArray *other_classes = other_selector.classes;
         for (NSString *class in self.classes) 
         {
@@ -135,7 +134,6 @@
     // see if the class name doens't match
     if (self.className)
     {
-        NSLog(@"comparing my class: %@ to other's class %@", self.className, other_selector.className);
         if (other_selector.className == nil) return NO;
         if (![self.className isEqualToString:other_selector.className]) return NO;
     }
@@ -143,7 +141,6 @@
     // finally see if the id matches (might not...)
     if (self.cssID) 
     {
-        NSLog(@"comparing my ID: %@ to other's ID %@", self.cssID, other_selector.cssID);
         if (other_selector.cssID == nil) return NO;
         if (![self.cssID isEqualToString:other_selector.cssID]) return NO;
     }
@@ -153,7 +150,9 @@
 
 - (NSString*)description 
 {
-    return self.selector;
+    if (_selector) return _selector;
+    
+    return [NSString stringWithFormat:@"Class: %@, classes: %@, ID: %@", _className, _classes, _cssID];
 }
 
 /** calculates precedence score based on number of classes, ids, etc.

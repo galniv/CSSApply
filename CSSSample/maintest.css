@@ -3,11 +3,19 @@ UILabel{
     textColor: #00ff00;
 }
 
+#magicButton {
+    backgroundColor: #00FFFF;
+}
+
 UIRoundedRectButton
 {
     backgroundColor: #FF0000;
 }
 
-UIRoundedRectButton#magicButton {
+UIRoundedRectButton.someClass {
+    backgroundColor: #0000FF;
+}
+
+UIRoundedRectButton.someClass#abc {
     backgroundColor: #00FF00;
 }

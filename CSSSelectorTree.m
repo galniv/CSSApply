@@ -72,11 +72,19 @@
     }
     return top_parent;
 }
+
 #pragma mark Accessors
+
+/* 
+ * Sort nodes so that the least-specific selector is at the top.
+ */
 - (void)sortNodes 
 {
-    [self.nodes sortUsingComparator:(NSComparator)^(CSSSelector *a_sel, CSSSelector *b_sel) 
+    [self.nodes sortUsingComparator:(NSComparator)^(CSSSelectorTree *a_sel, CSSSelectorTree *b_sel) 
     {
+        [a_sel sortNodes];
+        [b_sel sortNodes];
+        
         NSInteger a_score = [a_sel score];
         NSInteger b_score = [b_sel score];
         
@@ -105,9 +113,9 @@
     return results;
 }
 
-- (BOOL)isLeaf 
+- (BOOL)isLeaf
 {
-    return (self.nodes.count ? NO : YES);
+    return (self.nodes.count == 0);
 }
 - (NSString*)name 
 {
@@ -118,6 +126,8 @@
  Note: this may not be quite right. How do we know we "own" the biggest node?*/
 - (NSInteger)score 
 {
+    if ([self isLeaf]) return _selector.score;
+    
     NSInteger max_score = 0;
     for (CSSSelectorTree* node in self.nodes) 
     {
@@ -134,6 +144,11 @@
         _nodes = [[NSMutableArray alloc] initWithCapacity:20];
     }
     return _nodes;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"CSSSelectorTree [%@]", _selector];
 }
 
 @end

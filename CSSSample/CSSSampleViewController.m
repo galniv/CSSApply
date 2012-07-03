@@ -35,8 +35,26 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     button.frame = CGRectMake(10, 10, 100, 100);
     button.CSSID = @"magicButton";
-    [button setTitle:@"button!" forState:UIControlStateNormal];
+    [button setTitle:@"#magicbutton" forState:UIControlStateNormal];
     [[self view] addSubview:button];
+    
+    UIButton *button2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button2.frame = CGRectMake(115, 10, 100, 100);
+    [button2 setTitle:@"normal" forState:UIControlStateNormal];
+    [[self view] addSubview:button2];
+    
+    UIButton *button3 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button3.frame = CGRectMake(220, 10, 100, 100);
+    [button3 addCSSClassName:@"someClass"];
+    [button3 setTitle:@".class" forState:UIControlStateNormal];
+    [[self view] addSubview:button3];
+    
+    UIButton *button4 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button4.frame = CGRectMake(10, 300, 100, 100);
+    [button4 addCSSClassName:@"someClass"];
+    button4.CSSID = @"abc";
+    [button4 setTitle:@"class#id" forState:UIControlStateNormal];
+    [[self view] addSubview:button4];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

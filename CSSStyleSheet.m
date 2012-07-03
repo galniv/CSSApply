@@ -37,8 +37,11 @@
     // grab the entire file and load the rule dictionary.
     NSDictionary *rules = [parser parseFilename:[url path]];
     
-    //build the tree from the parsed rules
+    // build the tree from the parsed rules
     [self buildTree:rules];
+    
+    // sort the tree so that the least-specific node is at the top.
+    [_root sortNodes];
 }
 
 - (void)loadFromString:(NSString *)css_code {
