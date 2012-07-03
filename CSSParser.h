@@ -32,5 +32,5 @@
 }
 
 - (NSDictionary*)parseFilename:(NSString*)filename;
-
+- (NSDictionary*)parseString:(NSString*) string;
 @end

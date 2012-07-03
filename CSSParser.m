@@ -9,6 +9,7 @@
 #import "CSSTokens.h"
 #import "css.h"
 #import "CSSParser.h"
+#import "fmemopen.h"
 
 typedef enum 
 {
@@ -257,10 +258,7 @@ int cssConsume(char* text, int token)
 #pragma mark -
 #pragma mark Public
 
-
-
-- (NSDictionary*)parseFilename:(NSString*)filename 
-{
+- (void) reset {
     gActiveParser = self;
     
     [_ruleSets removeAllObjects];
@@ -268,8 +266,30 @@ int cssConsume(char* text, int token)
     _activeRuleSet=nil;
     _activePropertyName=nil;
     _lastTokenText=nil;
+}
+
+
+- (NSDictionary*)parseFilename:(NSString*)filename 
+{
+    [self reset];
     
     cssin = fopen([filename UTF8String], "r");
+    
+    csslex();
+    
+    fclose(cssin);
+    
+    NSDictionary* result = [_ruleSets copy];
+    _ruleSets=nil;
+    return result;
+}
+
+- (NSDictionary *)parseString:(NSString *)string {
+    [self reset];
+    
+    const char* cstr = [string UTF8String];
+    
+    cssin = fmemopen((void *)cstr, sizeof(char) * (string.length + 1), "r");
     
     csslex();
     
