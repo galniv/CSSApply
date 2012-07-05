@@ -26,6 +26,7 @@
         }
     }
 }
+
 - (void)applyStylesToChildren:(CSSSelectorTree *)treeNode 
        withInheirtedStyleDict:(NSDictionary *)mdict
                       recurse:(BOOL)doRecurse

@@ -28,12 +28,12 @@
     return self;
 }
 
-- (id)initWithClassName:(NSString*)aClassName classNames:(NSSet*)aClassNames classID:(NSString*)aCssID 
+- (id)initWithClassName:(NSString*)aClassName classNames:(NSArray*)classNames classID:(NSString*)aCssID 
 {
     if (self = [super init])
     {
         _className = aClassName;
-        _classes = [aClassNames copy];
+        _classes = [NSMutableArray arrayWithArray:classNames];
         _cssID = aCssID;
     }
     return self;
@@ -117,8 +117,8 @@
 
 - (BOOL)doesMatchIntoSelector:(CSSSelector *)other_selector 
 {
-    NSLog(@"ID: %@, className: %@, classes: %@", self.cssID, self.className, self.classes);
-    NSLog(@"comapring to: ID: %@, className: %@, classes: %@", other_selector.cssID, other_selector.className, other_selector.classes);
+//    NSLog(@"ID: %@, className: %@, classes: %@", self.cssID, self.className, self.classes);
+//    NSLog(@"comapring to: ID: %@, className: %@, classes: %@", other_selector.cssID, other_selector.className, other_selector.classes);
     if (self.classes)
     {
         NSArray *other_classes = other_selector.classes;

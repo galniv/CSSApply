@@ -62,7 +62,7 @@ int cssConsume(char* text, int token)
 {
     // ignroe whitespace
     NSString* string = [[NSString stringWithCString: text encoding: NSUTF8StringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    NSLog(@"current: %d, %@. previous: %d, %@", token, string, _lastToken, _lastTokenText);
+//    NSLog(@"current: %d, %@. previous: %d, %@", token, string, _lastToken, _lastTokenText);
     switch (token) 
     {
         case CSSHASH:
