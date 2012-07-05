@@ -25,7 +25,7 @@
 
 - (id)initWithSelectorStr:(NSString*)selector;
 
-- (id)initWithClassName:(NSString*)aClassName classNames:(NSSet*)aClassNames classID:(NSString*)aCssID;
+- (id)initWithClassName:(NSString*)aClassName classNames:(NSArray*)classNames classID:(NSString*)aCssID;
 
 /** Returns the components of the the selector (including the slug).
  * The components which are separated by spaces (mainly descendant selectors).
