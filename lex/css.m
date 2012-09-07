@@ -2490,6 +2490,8 @@ extern int isatty (int );
     static void css_init_buffer  (YY_BUFFER_STATE  b, FILE * file )
 
 {
+    if (!b) return;
+    
 	int oerrno = errno;
     
 	css_flush_buffer(b );
