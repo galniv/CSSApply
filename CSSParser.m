@@ -235,36 +235,33 @@ int cssConsume(char* text, int token)
 	// strip 0X if it appears
 	if ([cString hasPrefix:@"0X"]) cString = [cString substringFromIndex:2];
 	
-	if ([cString length] != 6) return [UIColor clearColor];
+	if ([cString length] != 6 && [cString length] != 8) return [UIColor clearColor];
     
 	// Separate into r, g, b substrings
-	NSRange range;
-	range.location = 0;
-	range.length = 2;
-	NSString *rString = [cString substringWithRange:range];
-	
-	range.location = 2;
-	NSString *gString = [cString substringWithRange:range];
-	
-	range.location = 4;
-	NSString *bString = [cString substringWithRange:range];
-	
-	// Scan values
-	unsigned int r, g, b;
-	[[NSScanner scannerWithString:rString] scanHexInt:&r];
-	[[NSScanner scannerWithString:gString] scanHexInt:&g];
-	[[NSScanner scannerWithString:bString] scanHexInt:&b];
-	
+    unsigned int a, r, g, b;
+    if (8 == [cString length])
+    {
+        [[NSScanner scannerWithString:[cString substringWithRange:NSMakeRange(0, 2)]] scanHexInt:&a];
+        [[NSScanner scannerWithString:[cString substringWithRange:NSMakeRange(2, 2)]] scanHexInt:&r];
+        [[NSScanner scannerWithString:[cString substringWithRange:NSMakeRange(4, 2)]] scanHexInt:&g];
+        [[NSScanner scannerWithString:[cString substringWithRange:NSMakeRange(6, 2)]] scanHexInt:&b];
+    }
+    else
+    {
+        a = 255;
+        [[NSScanner scannerWithString:[cString substringWithRange:NSMakeRange(0, 2)]] scanHexInt:&r];
+        [[NSScanner scannerWithString:[cString substringWithRange:NSMakeRange(2, 2)]] scanHexInt:&g];
+        [[NSScanner scannerWithString:[cString substringWithRange:NSMakeRange(4, 2)]] scanHexInt:&b];
+    }
+
 	return [UIColor colorWithRed:((float) r / 255.0f)
 						   green:((float) g / 255.0f)
 							blue:((float) b / 255.0f)
-						   alpha:1.0f];
+						   alpha:((float) a / 255.0f)];
 }
 
 #pragma mark -
 #pragma mark Public
-
-
 
 - (NSDictionary*)parseFilename:(NSString*)filename 
 {
